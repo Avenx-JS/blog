@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Avenx.js Official Blog",
-    "base_url": "https://avenx.js.org",
+    "base_url": "https://blog.avenx-js.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",

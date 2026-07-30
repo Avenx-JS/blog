@@ -45,9 +45,8 @@ const fontsConfig = Object.entries(theme.fonts.font_family)
     };
   });
 
-const isDev = process.env.NODE_ENV === "development";
-const siteUrl = process.env.SITE_URL || config.site.base_url || "https://avenx-js.github.io/blog";
-const basePath = process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : (isDev ? "/" : "/blog");
+const siteUrl = process.env.SITE_URL || config.site.base_url || "https://blog.avenx-js.com";
+const basePath = process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : (config.site.base_path || "/");
 
 // https://astro.build/config
 export default defineConfig({
