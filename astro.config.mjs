@@ -45,10 +45,14 @@ const fontsConfig = Object.entries(theme.fonts.font_family)
     };
   });
 
+const isDev = process.env.NODE_ENV === "development";
+const siteUrl = process.env.SITE_URL || config.site.base_url || "https://avenx-js.github.io/blog";
+const basePath = process.env.BASE_PATH !== undefined ? process.env.BASE_PATH : (isDev ? "/" : "/blog");
+
 // https://astro.build/config
 export default defineConfig({
-  site: config.site.base_url ? config.site.base_url : "http://examplesite.com",
-  base: config.site.base_path ? config.site.base_path : "/",
+  site: siteUrl,
+  base: basePath,
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharpImageService() },
   vite: { plugins: [tailwindcss()] },
