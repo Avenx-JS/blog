@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import config from "@/config/config.json";
+import { formatUrl } from "@/lib/utils/urlFormatter";
+
 const { src } = Astro.props;
 const {
   logo,
@@ -15,15 +17,18 @@ const {
   logo_text: string;
   title: string;
 } = config.site;
+
+const logoImageSrc = formatUrl(src ? src : logo);
+const homeHref = formatUrl("/");
 ---
 
-<a href="/" class="navbar-brand block">
+<a href={homeHref} class="navbar-brand block">
   {
     src || logo ? (
       <Image
         width={logo_width.replace("px", "") * 2}
         height={logo_height.replace("px", "") * 2}
-        src={src ? src : logo}
+        src={logoImageSrc}
         alt={title}
         style={{
           height: logo_height.replace("px", "") + "px",

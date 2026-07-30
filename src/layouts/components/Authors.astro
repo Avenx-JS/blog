@@ -1,5 +1,6 @@
 ---
 import { markdownify } from "@/lib/utils/textConverter";
+import { formatUrl } from "@/lib/utils/urlFormatter";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -17,7 +18,7 @@ const { authors } = Astro.props;
         {author.data.image && (
           <div class="mb-4">
             <Image
-              src={author.data.image}
+              src={formatUrl(author.data.image)}
               alt={author.data.title}
               height={150}
               width={150}
@@ -27,7 +28,7 @@ const { authors } = Astro.props;
         )}
         <h3 class="h4 mt-8 mb-3">
           <a
-            href={`/authors/${author.id}`}
+            href={formatUrl(`/authors/${author.id}`)}
             class="block hover:text-primary transition duration-200"
           >
             {author.data.title}
@@ -38,7 +39,7 @@ const { authors } = Astro.props;
         )}
 
         <a
-          href={`/authors/${author.id}`}
+          href={formatUrl(`/authors/${author.id}`)}
           class="inline-flex items-center text-primary transition duration-200 hover:opacity-70"
         >
           Read More <BsArrowRightCircle className="inline ml-2" />

@@ -2,6 +2,7 @@
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
 import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
+import { formatUrl } from "@/lib/utils/urlFormatter";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
@@ -24,12 +25,12 @@ const { className, posts, fluid } = Astro.props;
       <div class={i === 0 && fluid != false ? "col-12" : "col-12 sm:col-6"}>
         {post.data.image && (
           <a
-            href={`/blog/${post.id}`}
+            href={formatUrl(`/${post.id}`)}
             class="rounded-lg block hover:text-primary overflow-hidden group"
           >
             <Image
               class="group-hover:scale-[1.03] transition duration-300 w-full"
-              src={post.data.image}
+              src={formatUrl(post.data.image)}
               alt={post.data.title}
               width={i === 0 ? 925 : 445}
               height={i === 0 ? 475 : 230}
@@ -46,12 +47,12 @@ const { className, posts, fluid } = Astro.props;
               )
               .map((author) => (
                 <a
-                  href={`/authors/${slugify(author.data.title)}`}
+                  href={formatUrl(`/authors/${slugify(author.data.title)}`)}
                   class="flex items-center hover:text-primary font-medium"
                 >
                   {author.data.image && (
                     <Image
-                      src={author.data.image}
+                      src={formatUrl(author.data.image)}
                       alt={author.data.title}
                       height={50}
                       width={50}
@@ -73,7 +74,7 @@ const { className, posts, fluid } = Astro.props;
               {post.data.categories.map((category, i: number) => (
                 <li class="inline-block">
                   <a
-                    href={`/categories/${slugify(category)}`}
+                    href={formatUrl(`/categories/${slugify(category)}`)}
                     class="mr-2 hover:text-primary font-medium"
                   >
                     {humanize(category)}
@@ -86,7 +87,7 @@ const { className, posts, fluid } = Astro.props;
         </ul>
         <h3 class="mb-4">
           <a
-            href={`/blog/${post.id}`}
+            href={formatUrl(`/${post.id}`)}
             class="block hover:text-primary transition duration-300"
           >
             {post.data.title}

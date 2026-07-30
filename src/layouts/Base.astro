@@ -9,6 +9,8 @@ import "@/styles/main.css";
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 
+import { formatUrl } from "@/lib/utils/urlFormatter";
+
 // font families - extract font names for Font component (filter out type keys)
 const fontEntries = Object.entries(theme.fonts.font_family).filter(
   ([key]) => !key.includes("_type"),
@@ -33,7 +35,7 @@ const { title, meta_title, description, image, noindex, canonical } =
 <html lang="en">
   <head>
     <!-- favicon -->
-    <link rel="shortcut icon" href={config.site.favicon} />
+    <link rel="shortcut icon" href={formatUrl(config.site.favicon)} />
     <!-- theme meta -->
     <meta name="theme-name" content="bookworm-light-astro" />
     <meta name="msapplication-TileColor" content="#000000" />
