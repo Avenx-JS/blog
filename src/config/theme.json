@@ -3,15 +3,15 @@
     "default": {
       "theme_color": {
         "primary": "#ff385c",
-        "body": "#0d1117",
-        "border": "#21262d",
-        "light": "#161b22",
-        "dark": "#f0f6fc"
+        "body": "#000000",
+        "border": "#222222",
+        "light": "#111111",
+        "dark": "#ffffff"
       },
       "text_color": {
-        "text": "#c9d1d9",
-        "text-dark": "#f0f6fc",
-        "text-light": "#8b949e"
+        "text": "#cccccc",
+        "text-dark": "#ffffff",
+        "text-light": "#888888"
       }
     }
   },
