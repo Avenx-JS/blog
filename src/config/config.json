@@ -5,7 +5,7 @@
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
-    "logo": "/images/logo.png",
+    "logo": "/images/avenx-logo.png",
     "logo_width": "150",
     "logo_height": "40",
     "logo_text": "Avenx.js Blog"
