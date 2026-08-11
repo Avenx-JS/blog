@@ -19,13 +19,13 @@ const { title, description, authors, categories, image, date, tags } =
   post.data;
 ---
 
-<section class="section">
-  <div class="container">
-    <article class="row justify-center">
-      <div class="md:col-10 text-center">
-        <h1 set:html={markdownify(title)} class="h2" />
-        <ul class="mt-4 flex flex-wrap items-center justify-center text-text">
-          <li class="mx-3">
+<section class="section py-12">
+  <div class="container max-w-[900px]">
+    <article class="flex flex-col items-center">
+      <div class="w-full text-center mb-8">
+        <h1 set:html={markdownify(title)} class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6" />
+        <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-slate-400">
+          <div>
             {
               allAuthors
                 .filter((author) =>
@@ -36,74 +36,68 @@ const { title, description, authors, categories, image, date, tags } =
                 .map((author) => (
                   <a
                     href={formatUrl(`/authors/${slugify(author.id)}`)}
-                    class="flex items-center hover:text-primary font-medium"
+                    class="flex items-center text-slate-300 hover:text-white font-medium transition-colors"
                   >
                     {author.data.image && (
                       <Image
                         src={formatUrl(author.data.image)}
                         alt={author.data.title}
-                        height={50}
-                        width={50}
-                        class="mr-2 h-6 w-6 rounded-full"
+                        height={40}
+                        width={40}
+                        class="mr-2 h-6 w-6 rounded-full border border-white/10"
                       />
                     )}
                     <span>{author.data.title}</span>
                   </a>
                 ))
             }
-          </li>
-          <li class="mx-3 flex items-center flex-wrap font-medium">
-            <BiCalendarEdit className="mr-1 h-5 w-5 text-gray-600" />
+          </div>
+          <div class="flex items-center text-slate-400">
+            <BiCalendarEdit className="mr-1.5 h-4 w-4 text-slate-400" />
             {dateFormat(date)}
-          </li>
-          <li class="mx-3 flex items-center flex-wrap">
-            <BiCategoryAlt className="mr-1 h-[18px] w-[18px] text-gray-600" />
-
-            <ul>
-              {
-                categories.map((category: string, i: number) => (
-                  <li class="inline-block">
-                    <a
-                      href={formatUrl(`/categories/${slugify(category)}`)}
-                      class="mr-2 hover:text-primary font-medium"
-                    >
-                      {humanize(category)}
-                      {i !== post.data.categories.length - 1 && ","}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </li>
-        </ul>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <BiCategoryAlt className="h-4 w-4 text-slate-400" />
+            {
+              categories.map((category: string) => (
+                <a
+                  href={formatUrl(`/categories/${slugify(category)}`)}
+                  class="bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:border-white/30 px-2.5 py-0.5 rounded font-mono text-[11px] transition-all"
+                >
+                  {humanize(category)}
+                </a>
+              ))
+            }
+          </div>
+        </div>
       </div>
 
-      <div class="col-12 mt-8 mb-2">
-        {
-          image && (
+      {
+        image && (
+          <div class="w-full mb-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-[rgba(12,12,15,0.75)]">
             <Image
               src={formatUrl(image)}
               height={500}
               width={1000}
               alt={title}
-              class="rounded-lg"
+              class="w-full object-cover max-h-[480px]"
             />
-          )
-        }
-      </div>
+          </div>
+        )
+      }
 
-      <div class="md:col-10">
-        <div class="content mb-16 text-left">
+      <div class="w-full">
+        <div class="content mb-12 text-left bg-[rgba(12,12,15,0.4)] backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-10 shadow-xl">
           <Content />
         </div>
-        <div class="flex flex-wrap items-center justify-between">
-          <ul class="mr-4 mb-4 space-x-3">
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
+          <ul class="flex flex-wrap gap-2">
             {
               tags.map((tag: string) => (
-                <li class="inline-block">
+                <li>
                   <a
                     href={formatUrl(`/tags/${slugify(tag)}`)}
-                    class="block rounded-lg bg-light px-4 py-2 font-semibold text-dark text-sm hover:text-primary transition duration-300"
+                    class="inline-block rounded-lg bg-white/5 border border-white/10 px-3.5 py-1.5 font-mono text-xs text-slate-300 hover:text-white hover:border-white/30 transition duration-200"
                   >
                     #{humanize(tag)}
                   </a>
@@ -112,7 +106,7 @@ const { title, description, authors, categories, image, date, tags } =
             }
           </ul>
           <Share
-            className="social-share mb-4"
+            className="social-share"
             title={title}
             description={description}
             slug={post.id}
@@ -126,9 +120,9 @@ const { title, description, authors, categories, image, date, tags } =
 <!-- similar posts -->
 {
   similarPosts.length > 0 && (
-    <section class="section pt-0">
-      <div class="container">
-        <h2 class="mb-8 text-center h3">Similar Posts</h2>
+    <section class="section pt-4 pb-16">
+      <div class="container max-w-[900px]">
+        <h2 class="mb-8 text-center text-2xl font-bold tracking-tight text-white">Similar Posts</h2>
         <SimilarPosts posts={similarPosts.slice(0, 3)} />
       </div>
     </section>

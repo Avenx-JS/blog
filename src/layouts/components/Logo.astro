@@ -1,44 +1,15 @@
 ---
-import { Image } from "astro:assets";
-import config from "@/config/config.json";
 import { formatUrl } from "@/lib/utils/urlFormatter";
 
-const { src } = Astro.props;
-const {
-  logo,
-  logo_width,
-  logo_height,
-  logo_text,
-  title,
-}: {
-  logo: string;
-  logo_width: any;
-  logo_height: any;
-  logo_text: string;
-  title: string;
-} = config.site;
-
-const logoImageSrc = formatUrl(src ? src : logo);
 const homeHref = formatUrl("/");
 ---
 
-<a href={homeHref} class="navbar-brand block">
-  {
-    src || logo ? (
-      <Image
-        width={logo_width.replace("px", "") * 2}
-        height={logo_height.replace("px", "") * 2}
-        src={logoImageSrc}
-        alt={title}
-        style={{
-          height: logo_height.replace("px", "") + "px",
-          width: logo_width.replace("px", "") + "px",
-        }}
-      />
-    ) : logo_text ? (
-      logo_text
-    ) : (
-      title
-    )
-  }
+<a href={homeHref} class="flex items-center gap-2.5 text-white font-extrabold text-xl tracking-tight no-underline group">
+  <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 2L2 9L16 16L30 9L16 2Z" fill="white" />
+    <path d="M2 23L16 30L30 23" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M2 16L16 23L30 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+  </svg>
+  <span class="font-extrabold text-white">avenx<span class="text-white/60 font-semibold">.js</span></span>
+  <span class="font-mono text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-white/10 text-slate-300 border border-white/15 tracking-wider">Blog</span>
 </a>

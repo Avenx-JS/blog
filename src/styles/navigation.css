@@ -1,6 +1,6 @@
 /* navbar items */
 .navbar {
-  @apply relative flex max-w-[1260px] flex-wrap items-center justify-between;
+  @apply relative flex max-w-[1240px] flex-wrap items-center justify-between mx-auto;
 }
 
 .navbar-brand img {
@@ -16,11 +16,11 @@
 }
 
 .nav-link {
-  @apply p-3 text-lg font-semibold text-dark transition hover:text-primary md:p-4;
+  @apply p-2 md:px-4 md:py-2 text-sm font-semibold text-slate-300 hover:text-white transition-all;
 }
 
 .nav-dropdown-list {
-  @apply z-10 rounded-lg bg-light border border-border px-6 py-3 shadow-lg transition;
+  @apply z-10 rounded-xl bg-black/90 backdrop-blur-md border border-white/10 px-5 py-3 shadow-2xl transition-all;
 }
 
 .nav-dropdown-item {
@@ -28,20 +28,20 @@
 }
 
 .nav-dropdown-link {
-  @apply block min-w-[150px] py-1 text-[17px] font-semibold text-dark transition hover:text-primary;
+  @apply block min-w-[140px] py-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors;
 }
 
 /* search style */
 .search-modal {
-  @apply invisible absolute top-0 left-0 right-0 z-10 h-10 bg-light opacity-0 transition md:h-full;
+  @apply invisible absolute top-0 left-0 right-0 z-10 h-10 bg-black/90 backdrop-blur-md opacity-0 transition md:h-full text-white;
 }
 
 .search-modal .form-input {
-  @apply h-full w-full border-0 text-lg;
+  @apply h-full w-full border-0 text-lg bg-transparent text-white focus:outline-none placeholder:text-slate-500;
 }
 
 .search-modal .search-close {
-  @apply absolute top-1/2 right-2 -translate-y-1/2 p-3 text-h4;
+  @apply absolute top-1/2 right-2 -translate-y-1/2 p-3 text-h4 text-white hover:text-slate-300;
 }
 
 .search-modal.open {

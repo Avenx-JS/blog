@@ -41,9 +41,9 @@
   li {
     @apply inline-block;
     a {
-      @apply block h-11 w-11 rounded-lg border border-light bg-transparent text-center text-white transition hover:border-primary hover:bg-primary;
+      @apply block h-10 w-10 rounded-xl border border-white/10 bg-white/5 text-center text-slate-300 transition-all hover:border-white hover:bg-white hover:text-black;
       svg {
-        @apply m-auto h-11 text-base;
+        @apply m-auto h-10 text-base;
       }
     }
   }
@@ -54,7 +54,7 @@
   li {
     @apply inline-block;
     a {
-      @apply block p-3 text-dark transition hover:text-primary;
+      @apply block p-3 text-slate-400 transition hover:text-white;
       svg {
         @apply text-lg;
       }
@@ -67,22 +67,21 @@
   li {
     @apply inline-block;
     a {
-      @apply block p-3 transition transition duration-300 hover:text-primary;
+      @apply block p-2 text-slate-400 transition duration-300 hover:text-white;
     }
   }
 }
 
 /* content style */
 .content {
-  @apply prose prose-invert max-w-none prose-headings:font-bold prose-h1:mb-4 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-4 prose-h2:text-h2-sm prose-h3:mt-4 prose-h3:text-h3-sm prose-h4:mt-4 prose-h5:mb-4 prose-h6:mb-6 prose-blockquote:rounded-lg prose-blockquote:border-primary prose-blockquote:bg-light prose-blockquote:px-7 prose-blockquote:py-3 prose-blockquote:text-lg prose-blockquote:leading-8 prose-pre:px-6 prose-pre:py-5 md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
-  @apply prose-a:text-primary prose-a:transition prose-a:duration-200 prose-a:hover:text-dark;
-  @apply prose-img:rounded-lg;
-  @apply prose-blockquote:text-dark;
-  @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-lg prose-table:before:absolute prose-table:before:left-0 prose-table:before:top-0 prose-table:before:h-full prose-table:before:w-full prose-table:before:rounded-[inherit] prose-table:before:border prose-table:before:border-border prose-table:before:content-[""];
-  @apply prose-thead:border-border prose-thead:bg-light;
-  @apply prose-th:relative prose-th:z-10 prose-th:px-4 prose-th:py-[18px] prose-th:text-text-dark;
-  @apply prose-tr:border-border;
-  @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px];
+  @apply prose prose-invert max-w-none prose-headings:font-bold prose-headings:text-white prose-headings:tracking-tight prose-h1:mb-4 prose-h1:text-h1-sm prose-h2:mb-4 prose-h2:mt-6 prose-h2:text-h2-sm prose-h3:mt-6 prose-h3:text-h3-sm prose-h4:mt-4 prose-h5:mb-4 prose-h6:mb-6 prose-p:text-slate-300 prose-p:leading-relaxed prose-blockquote:rounded-r-xl prose-blockquote:border-l-2 prose-blockquote:border-white/40 prose-blockquote:bg-white/5 prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:text-slate-200 prose-blockquote:italic prose-pre:rounded-xl prose-pre:border prose-pre:border-white/10 prose-pre:bg-[#050508] prose-pre:px-6 prose-pre:py-5 prose-pre:shadow-2xl prose-code:font-mono prose-code:text-slate-200 md:prose-h1:text-h1 md:prose-h2:text-h2 md:prose-h3:text-h3;
+  @apply prose-a:text-white prose-a:underline prose-a:decoration-white/30 prose-a:transition prose-a:duration-200 prose-a:hover:decoration-white;
+  @apply prose-img:rounded-xl prose-img:border prose-img:border-white/10;
+  @apply prose-table:relative prose-table:overflow-hidden prose-table:rounded-xl prose-table:border prose-table:border-white/10;
+  @apply prose-thead:border-b prose-thead:border-white/10 prose-thead:bg-white/5;
+  @apply prose-th:px-4 prose-th:py-3 prose-th:text-white;
+  @apply prose-tr:border-b prose-tr:border-white/10;
+  @apply prose-td:px-4 prose-td:py-3 prose-td:text-slate-300;
 }
 
 /* tab */

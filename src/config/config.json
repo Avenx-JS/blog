@@ -27,7 +27,8 @@
   },
 
   "params": {
-    "copyright": "Copyright © 2026 Avenx.js Core Team. Built with Astro & Bookworm Theme."
+    "copyright": "Copyright © 2026 Avenx.js Core Team. Built with Astro & Bookworm Theme.",
+    "contact_form_action": "#"
   },
 
   "contactinfo": {
