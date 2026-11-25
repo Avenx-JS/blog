@@ -1,11 +1,8 @@
 ---
-import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
-import { humanize, plainify, slugify } from "@/lib/utils/textConverter";
+import { plainify } from "@/lib/utils/textConverter";
 import { formatUrl } from "@/lib/utils/urlFormatter";
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
 
 type Props = {
   posts: CollectionEntry<"posts">[];
@@ -13,82 +10,23 @@ type Props = {
   fluid?: boolean;
 };
 
-const authors = await getSinglePage("authors");
-const { className, posts, fluid } = Astro.props;
+const { className = "", posts } = Astro.props;
 ---
 
-<div
-  class={`grid grid-cols-1 ${posts.length > 1 ? "md:grid-cols-2" : ""} gap-8 ${className}`}
->
+<ol class={`post-list ${className}`}>
   {
-    posts.map((post, i: number) => (
-      <div class={`${i === 0 && fluid !== false ? "md:col-span-2" : ""} bg-[rgba(12,12,15,0.75)] backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden p-6 hover:border-white/25 hover:-translate-y-1 transition-all duration-300 shadow-xl flex flex-col justify-between group`}>
+    posts.map((post) => (
+      <li class="post-row">
+        <time datetime={post.data.date?.toISOString()}>
+          {post.data.date && dateFormat(post.data.date, "MMM d, yyyy")}
+        </time>
         <div>
-          {post.data.image && (
-            <a
-              href={formatUrl(`/${post.id}`)}
-              class="rounded-xl block overflow-hidden mb-6 relative border border-white/5"
-            >
-              <Image
-                class="group-hover:scale-[1.03] transition duration-500 w-full object-cover max-h-[360px]"
-                src={formatUrl(post.data.image)}
-                alt={post.data.title}
-                width={i === 0 ? 925 : 445}
-                height={i === 0 ? 475 : 230}
-              />
-            </a>
-          )}
-          <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 mb-4">
-            {authors
-              .filter((author) =>
-                post.data.authors
-                  .map((author) => slugify(author))
-                  .includes(slugify(author.data.title))
-              )
-              .map((author) => (
-                <a
-                  href={formatUrl(`/authors/${slugify(author.data.title)}`)}
-                  class="flex items-center text-slate-300 hover:text-white font-medium transition-colors"
-                >
-                  {author.data.image && (
-                    <Image
-                      src={formatUrl(author.data.image)}
-                      alt={author.data.title}
-                      height={40}
-                      width={40}
-                      class="mr-2 h-5 w-5 rounded-full border border-white/10"
-                    />
-                  )}
-                  <span>{author.data.title}</span>
-                </a>
-              ))}
-            <span class="flex items-center text-slate-400">
-              <BiCalendarEdit className="mr-1.5 h-4 w-4 text-slate-400" />
-              {dateFormat(post.data.date!)}
-            </span>
-            <div class="flex items-center gap-1.5 flex-wrap ml-auto">
-              <BiCategoryAlt className="h-4 w-4 text-slate-400" />
-              {post.data.categories.map((category) => (
-                <a
-                  href={formatUrl(`/categories/${slugify(category)}`)}
-                  class="bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:border-white/30 px-2 py-0.5 rounded font-mono text-[11px] transition-all"
-                >
-                  {humanize(category)}
-                </a>
-              ))}
-            </div>
-          </div>
-          <h3 class="mb-3 text-2xl font-bold tracking-tight">
-            <a
-              href={formatUrl(`/${post.id}`)}
-              class="block text-white hover:text-slate-200 transition duration-200"
-            >
-              {post.data.title}
-            </a>
-          </h3>
-          <p class="text-slate-400 line-clamp-3 leading-relaxed text-sm">{plainify(post.body ?? "")}</p>
+          <h2>
+            <a href={formatUrl(`/${post.id}`)}>{plainify(post.data.title)}</a>
+          </h2>
+          <p>{post.data.description ?? plainify(post.body ?? "")}</p>
         </div>
-      </div>
+      </li>
     ))
   }
-</div>
+</ol>

@@ -1,13 +1,16 @@
 ---
-title: "🎉 Avenx.js v1.0.0 Release Date Confirmed: October 31st, 2026"
+title: "Avenx.js v1.0.0 Release Date Confirmed: October 31st, 2026"
 meta_title: "Avenx.js v1.0.0 Release Date Confirmed: October 31st, 2026"
 description: "We are excited to announce that the release date for Avenx.js v1.0.0 is officially set for October 31st, 2026!"
 date: 2026-07-30T10:00:00Z
 categories: ["Releases", "Announcements"]
 authors: ["Avenx.js Team"]
 tags: ["avenx", "v1.0.0", "release", "javascript"]
+discussion: "https://github.com/Avenx-JS/avenx-js/discussions/706"
 draft: false
 ---
+
+> **Update, October 31st 2026:** the v1.0.0 release has moved to **January 31st, 2027**. Read why in [Avenx.js v1.0.0 is moving to January 31, 2027](/avenx-v1-release-delayed).
 
 We are excited to announce that the release date for **Avenx.js v1.0.0 is officially set for October 31st, 2026! 🚀**
 

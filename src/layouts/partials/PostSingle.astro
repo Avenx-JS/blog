@@ -3,128 +3,119 @@ import Share from "@/components/Share.astro";
 import SimilarPosts from "@/components/SimilarPosts.astro";
 import { getSinglePage } from "@/lib/contentParser.astro";
 import dateFormat from "@/lib/utils/dateFormat";
+import readingTime from "@/lib/utils/readingTime";
 import similerItems from "@/lib/utils/similarItems";
-import { humanize, markdownify, slugify } from "@/lib/utils/textConverter";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import { plainify, slugify } from "@/lib/utils/textConverter";
 import { formatUrl } from "@/lib/utils/urlFormatter";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
-import { BiCalendarEdit, BiCategoryAlt } from "react-icons/bi";
+import { FaGithub } from "react-icons/fa6";
 
 const allAuthors = await getSinglePage("authors");
 const posts = await getSinglePage("posts");
 const { post } = Astro.props;
-const similarPosts = similerItems(post, posts, post.slug);
+const similarPosts = sortByDate(similerItems(post, posts, post.id));
 const { Content } = await render(post);
-const { title, description, authors, categories, image, date, tags } =
+const { title, description, authors, image, date, tags, discussion } =
   post.data;
+const postAuthors = allAuthors.filter((author) =>
+  authors.map((a: string) => slugify(a)).includes(slugify(author.data.title)),
+);
 ---
 
-<section class="section py-12">
-  <div class="container max-w-[900px]">
-    <article class="flex flex-col items-center">
-      <div class="w-full text-center mb-8">
-        <h1 set:html={markdownify(title)} class="text-3xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6" />
-        <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-slate-400">
-          <div>
-            {
-              allAuthors
-                .filter((author) =>
-                  authors
-                    .map((author: string) => slugify(author))
-                    .includes(slugify(author.data.title))
-                )
-                .map((author) => (
-                  <a
-                    href={formatUrl(`/authors/${slugify(author.id)}`)}
-                    class="flex items-center text-slate-300 hover:text-white font-medium transition-colors"
-                  >
-                    {author.data.image && (
-                      <Image
-                        src={formatUrl(author.data.image)}
-                        alt={author.data.title}
-                        height={40}
-                        width={40}
-                        class="mr-2 h-6 w-6 rounded-full border border-white/10"
-                      />
-                    )}
-                    <span>{author.data.title}</span>
-                  </a>
-                ))
-            }
-          </div>
-          <div class="flex items-center text-slate-400">
-            <BiCalendarEdit className="mr-1.5 h-4 w-4 text-slate-400" />
-            {dateFormat(date)}
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <BiCategoryAlt className="h-4 w-4 text-slate-400" />
-            {
-              categories.map((category: string) => (
-                <a
-                  href={formatUrl(`/categories/${slugify(category)}`)}
-                  class="bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:border-white/30 px-2.5 py-0.5 rounded font-mono text-[11px] transition-all"
-                >
-                  {humanize(category)}
-                </a>
-              ))
-            }
-          </div>
-        </div>
-      </div>
+<article class="container pt-14 md:pt-20">
+  <a
+    href={formatUrl("/")}
+    class="eyebrow inline-flex items-center gap-1.5 transition-colors hover:text-text-dark"
+  >
+    <span aria-hidden="true">←</span> All posts
+  </a>
 
+  <header class="mt-8 mb-10">
+    <h1 class="text-[2rem] leading-[1.15] font-semibold tracking-tight md:text-[2.75rem]">
+      {plainify(title)}
+    </h1>
+    {description && <p class="mt-4 text-lg text-text">{description}</p>}
+    <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-text-light">
       {
-        image && (
-          <div class="w-full mb-10 overflow-hidden rounded-2xl border border-white/10 shadow-2xl bg-[rgba(12,12,15,0.75)]">
-            <Image
-              src={formatUrl(image)}
-              height={500}
-              width={1000}
-              alt={title}
-              class="w-full object-cover max-h-[480px]"
-            />
-          </div>
-        )
+        postAuthors.map((author) => (
+          <a
+            href={formatUrl(`/authors/${author.id}`)}
+            class="flex items-center gap-2 text-text-dark transition-colors hover:text-primary"
+          >
+            {author.data.image && (
+              <Image
+                src={formatUrl(author.data.image)}
+                alt=""
+                height={48}
+                width={48}
+                class="h-6 w-6 rounded-full border border-border"
+              />
+            )}
+            <span>{author.data.title}</span>
+          </a>
+        ))
       }
+      {date && <span aria-hidden="true">·</span>}
+      {date && <time datetime={date.toISOString()}>{dateFormat(date, "MMMM d, yyyy")}</time>}
+      <span aria-hidden="true">·</span>
+      <span>{readingTime(post.body ?? "")}</span>
+    </div>
+  </header>
 
-      <div class="w-full">
-        <div class="content mb-12 text-left bg-[rgba(12,12,15,0.4)] backdrop-blur-sm border border-white/5 rounded-2xl p-6 md:p-10 shadow-xl">
-          <Content />
-        </div>
-        <div class="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
-          <ul class="flex flex-wrap gap-2">
-            {
-              tags.map((tag: string) => (
-                <li>
-                  <a
-                    href={formatUrl(`/tags/${slugify(tag)}`)}
-                    class="inline-block rounded-lg bg-white/5 border border-white/10 px-3.5 py-1.5 font-mono text-xs text-slate-300 hover:text-white hover:border-white/30 transition duration-200"
-                  >
-                    #{humanize(tag)}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-          <Share
-            className="social-share"
-            title={title}
-            description={description}
-            slug={post.id}
-          />
-        </div>
-      </div>
-    </article>
+  {
+    image && (
+      <Image
+        src={formatUrl(image)}
+        height={500}
+        width={1000}
+        alt=""
+        class="mb-10 w-full rounded-xl border border-border object-cover"
+      />
+    )
+  }
+
+  <div class="content">
+    <Content />
   </div>
-</section>
 
-<!-- similar posts -->
+  {
+    discussion && (
+      <aside class="callout mt-12">
+        <FaGithub className="mt-0.5 h-4 w-4 shrink-0 text-text-dark" />
+        <p>
+          This post was first published on GitHub Discussions.{" "}
+          <a href={discussion} class="link" target="_blank" rel="noopener">
+            Read the original and join the conversation
+          </a>
+          .
+        </p>
+      </aside>
+    )
+  }
+
+  <footer class="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+    <ul class="flex flex-wrap gap-2">
+      {
+        tags.map((tag: string) => (
+          <li>
+            <a href={formatUrl(`/tags/${slugify(tag)}`)} class="tag">
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Share className="social-share" title={title} description={description} slug={post.id} />
+  </footer>
+</article>
+
 {
   similarPosts.length > 0 && (
-    <section class="section pt-4 pb-16">
-      <div class="container max-w-[900px]">
-        <h2 class="mb-8 text-center text-2xl font-bold tracking-tight text-white">Similar Posts</h2>
-        <SimilarPosts posts={similarPosts.slice(0, 3)} />
-      </div>
+    <section class="container mt-20">
+      <h2 class="eyebrow mb-4">Keep reading</h2>
+      <SimilarPosts posts={similarPosts.slice(0, 3)} />
     </section>
   )
 }

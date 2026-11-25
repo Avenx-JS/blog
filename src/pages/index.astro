@@ -15,10 +15,8 @@ const currentPosts = sortedPosts.slice(0, config.settings.pagination);
 
 <Base>
   <Hero />
-  <section class="section" id="posts">
-    <div class="container">
-      <Posts posts={currentPosts} className="mb-16" />
-      <Pagination currentPage={1} totalPages={totalPages} />
-    </div>
+  <section class="container" id="posts">
+    <Posts posts={currentPosts} />
+    <Pagination currentPage={1} totalPages={totalPages} />
   </section>
 </Base>

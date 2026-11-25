@@ -1,6 +1,5 @@
 ---
 import Social from "@/components/Social.astro";
-import { markdownify } from "@/lib/utils/textConverter";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 
@@ -9,28 +8,15 @@ const { title, image, social } = author.data;
 const { Content } = await render(author);
 ---
 
-<section class="section">
-  <div class="container">
-    <div class="mb-4 text-center md:px-24">
-      {
-        image && (
-          <div class="mb-8">
-            <Image
-              src={image}
-              class="mx-auto rounded-lg"
-              height={150}
-              width={150}
-              alt={title}
-            />
-          </div>
-        )
-      }
-      <h1 set:html={markdownify(title)} class="page-heading h2 mb-8" />
-
-      <Social source={social} className="social-icons-simple" />
-      <div class="content">
-        <Content />
-      </div>
+<section class="container pt-16 md:pt-24">
+  <div class="flex items-center gap-5">
+    {image && <Image src={image} class="h-16 w-16 rounded-full border border-border" height={128} width={128} alt="" />}
+    <div>
+      <h1 class="text-3xl font-semibold tracking-tight">{title}</h1>
+      <Social source={social} className="social-icons -ml-2 mt-1" />
     </div>
+  </div>
+  <div class="content mt-6">
+    <Content />
   </div>
 </section>

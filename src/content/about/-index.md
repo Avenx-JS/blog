@@ -1,23 +1,24 @@
 ---
-title: "I’m John Doe, A content writer based in LDN, Currently at Bookworm"
+title: "About this blog"
 meta_title: "About"
-image: "/images/author.png"
+description: "Who writes the Avenx.js blog and what you'll find here."
 draft: false
-
-what_i_do:
-  title: "What I Do"
-  items:
-  - title: "Content Writing"
-    description: "Purus eget ipsum elementum venenatis, quis rutrum mi semper nonpurus eget ipsum elementum venenatis."
-  
-  - title: "Photography"
-    description: "Aenean maximus urna magna elementum, quis rutrum mi semper non purus eget ipsum venenatis."
-  
-  - title: "Web Research"
-    description: "Aenean maximus urna magna elementum venenatis, quis semper non purus eget ipsum venenatis."
-
 ---
 
-A content writer with over 12 years experience working across brand identity, publishing and digital products. Maecenas sit amet purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis quis non purus.
+This is the official blog of [Avenx.js](https://avenx-js.com), a compiler-first frontend framework. You write a component as one file, and the compiler turns it into a render program — a static HTML skeleton plus one binding per dynamic part. No virtual DOM, no expression interpreter in your bundle, and zero runtime dependencies.
 
-Purus eget ipsum elementum venenatis. Aenean maximus urna magna elementum venenatis, quis rutrum mi semper non purus eget ipsum elementum venenatis, aenean maximus urna magna elementum.
+The compiler also keeps a semantic model of your whole application, which powers the tools that make Avenx different:
+
+- **Atlas** — ask what a change will break, before you make it.
+- **Trace** — record why a bug happened, then replay it as a test.
+- **Rewind** — optimistic updates that undo themselves.
+- **Compiled expressions** — every template expression becomes plain JavaScript at build time.
+
+Here we post release notes, roadmap updates and the reasoning behind design decisions. Most announcements start as a [GitHub Discussion](https://github.com/Avenx-JS/avenx-js/discussions) — each post links back to its thread, so that's the place to reply.
+
+## Elsewhere
+
+- [Documentation](https://docs.avenx-js.com) — guides and API reference
+- [Dashboard](https://dev.avenx-js.com) — live benchmarks and test coverage
+- [GitHub](https://github.com/Avenx-JS/avenx-js) — source, issues and discussions
+- [Discord](https://discord.avenx-js.com) — chat with the team and community

@@ -79,6 +79,9 @@ export default defineConfig({
   ],
   markdown: {
     processor: unified(),
-    shikiConfig: { theme: "one-dark-pro", wrap: true },
+    shikiConfig: {
+      themes: { light: "github-light", dark: "github-dark" },
+      wrap: true,
+    },
   },
 });

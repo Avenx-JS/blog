@@ -5,7 +5,7 @@ import { getSinglePage } from "@/lib/contentParser.astro";
 import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import taxonomyFilter from "@/lib/utils/taxonomyFilter";
-import { humanize } from "@/lib/utils/textConverter";
+import { humanize, slugify } from "@/lib/utils/textConverter";
 
 export async function getStaticPaths() {
   const tags = await getTaxonomy("posts", "tags");
@@ -23,15 +23,16 @@ const posts = await getSinglePage("posts");
 const filterByTags = taxonomyFilter(posts, "tags", tag);
 const sortedPosts = sortByDate(filterByTags);
 
-const title = humanize(tag || "");
+const original = posts
+  .flatMap((p) => p.data.tags as string[])
+  .find((t) => slugify(t) === tag);
+const title = original ?? humanize(tag || "");
 ---
 
 <Base title={title || "Tag"}>
-  <div class="section">
-    <div class="container">
-      <p class="text-center text-2xl mb-4">Showing Posts From</p>
-      <h1 class="h2 mb-16 text-center text-primary">{title}</h1>
-      <Posts posts={sortedPosts} fluid={false} />
-    </div>
-  </div>
+  <section class="container pt-16 md:pt-24">
+    <a href="/tags" class="eyebrow transition-colors hover:text-text-dark">Tag</a>
+    <h1 class="page-heading mt-3">{title}</h1>
+    <Posts posts={sortedPosts} />
+  </section>
 </Base>

@@ -1,39 +1,28 @@
 {
   "site": {
-    "title": "Avenx.js Official Blog",
+    "title": "Avenx.js Blog",
     "base_url": "https://blog.avenx-js.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
-    "logo": "/images/avenx-logo.png",
+    "logo": "/images/avenx-mark.png",
     "logo_width": "150",
     "logo_height": "40",
-    "logo_text": "Avenx.js Blog"
+    "logo_text": "Avenx.js"
   },
-
   "settings": {
-    "pagination": 5
+    "pagination": 10
   },
-
   "metadata": {
     "meta_author": "Avenx.js Core Team",
-    "meta_image": "/images/og-image.png",
-    "meta_description": "Official Blog for Avenx.js - News, Tutorials, Releases, and Insights into Modern JavaScript Framework Engineering."
+    "meta_image": "/images/avenx-mark.png",
+    "meta_description": "News, releases and design notes from the team behind Avenx.js — a frontend framework that can explain itself."
   },
-
   "google_tag_manager": {
     "enable": false,
     "gtm_id": ""
   },
-
   "params": {
-    "copyright": "Copyright © 2026 Avenx.js Core Team. Built with Astro & Bookworm Theme.",
-    "contact_form_action": "#"
-  },
-
-  "contactinfo": {
-    "address": "Open Source Project",
-    "email": "contact@avenx.js.org",
-    "phone": ""
+    "copyright": "© 2026 Avenx.js contributors · MIT licensed"
   }
 }

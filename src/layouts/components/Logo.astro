@@ -1,15 +1,15 @@
 ---
 import { formatUrl } from "@/lib/utils/urlFormatter";
-
-const homeHref = formatUrl("/");
 ---
 
-<a href={homeHref} class="flex items-center gap-2.5 text-white font-extrabold text-xl tracking-tight no-underline group">
-  <svg class="w-6 h-6 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M16 2L2 9L16 16L30 9L16 2Z" fill="white" />
-    <path d="M2 23L16 30L30 23" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M2 16L16 23L30 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
-  </svg>
-  <span class="font-extrabold text-white">avenx<span class="text-white/60 font-semibold">.js</span></span>
-  <span class="font-mono text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-white/10 text-slate-300 border border-white/15 tracking-wider">Blog</span>
+<a href={formatUrl("/")} class="group flex items-center gap-2.5" aria-label="Avenx.js Blog — home">
+  <img
+    src={formatUrl("/images/avenx-mark.png")}
+    alt=""
+    width="28"
+    height="28"
+    class="h-7 w-7"
+  />
+  <span class="text-[15px] font-semibold tracking-tight text-text-dark">Avenx.js</span>
+  <span class="hidden text-[15px] text-text-light sm:inline">Blog</span>
 </a>

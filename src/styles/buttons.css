@@ -1,13 +1,13 @@
 .btn {
-  @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap;
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors duration-150;
 }
 
 .btn-primary,
 .btn-solid {
-  @apply bg-white text-black border border-white hover:opacity-90 hover:-translate-y-0.5;
+  @apply bg-text-dark text-body hover:opacity-85;
 }
 
 .btn-outline,
 .btn-outline-primary {
-  @apply bg-transparent text-white border border-white/20 hover:border-white hover:bg-white/5 hover:-translate-y-0.5;
+  @apply border border-border text-text-dark hover:border-text-light;
 }

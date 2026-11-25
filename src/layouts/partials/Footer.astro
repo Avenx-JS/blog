@@ -3,30 +3,32 @@ import Social from "@/components/Social.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import social from "@/config/social.json";
-import { markdownify } from "@/lib/utils/textConverter";
-import { formatUrl } from "@/lib/utils/urlFormatter";
 ---
 
-<footer class="section bg-black border-t border-white/10 py-12 relative z-10">
-  <div class="container text-center">
-    {/* footer menu */}
-    <ul class="mb-8 flex flex-wrap justify-center gap-6">
-      {
-        menu.footer.map((menu) => (
-          <li>
-            <a
-              href={formatUrl(menu.url)}
-              class="text-slate-400 hover:text-white transition-colors text-sm font-medium"
-            >
-              {menu.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    {/* social icons */}
-    <Social source={social.main} className="social-icons mb-8 flex justify-center" />
-    {/* copyright */}
-    <p set:html={markdownify(config.params.copyright)} class="text-slate-500 text-xs" />
+<footer class="mt-24 border-t border-border">
+  <div
+    class="container-wide flex flex-col gap-6 py-10 text-sm sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div class="flex items-center gap-3">
+      <img src="/images/bloop.png" alt="Bloop, the Avenx.js mascot" width="36" height="36" class="h-9 w-9" />
+      <div>
+        <p class="font-medium text-text-dark">A frontend framework that can explain itself.</p>
+        <p class="text-xs text-text-light">{config.params.copyright}</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        {
+          menu.footer.map((item) => (
+            <li>
+              <a href={item.url} class="text-text transition-colors hover:text-text-dark">
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <Social source={social.main} className="social-icons -mr-2" />
+    </div>
   </div>
 </footer>

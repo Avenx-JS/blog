@@ -1,22 +1,30 @@
+/* Dark palette — overrides the light vars that tw-theme writes from theme.json */
+@media (prefers-color-scheme: dark) {
+  :root:root {
+    --color-body: #0b0b0f;
+    --color-border: #1f1f26;
+    --color-light: #131318;
+    --color-dark: #f4f4f5;
+    --color-text: #a1a1aa;
+    --color-text-dark: #f4f4f5;
+    --color-text-light: #6b6b76;
+    --color-primary: #60a5fa;
+    --color-secondary: #818cf8;
+    color-scheme: dark;
+  }
+}
+
 html {
   @apply text-base;
+  scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-black font-primary font-normal leading-relaxed text-slate-400;
-  -webkit-font-smoothing: antialiased;
+  @apply bg-body font-primary font-normal leading-relaxed text-text antialiased;
 }
 
-.grid-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index: 0;
-  pointer-events: none;
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 22%, transparent);
 }
 
 h1,
@@ -25,7 +33,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-primary font-bold leading-tight text-white tracking-tight;
+  @apply font-primary font-semibold leading-tight tracking-tight text-text-dark;
 }
 
 h1,
@@ -60,9 +68,22 @@ h6,
 
 b,
 strong {
-  @apply font-semibold text-white;
+  @apply font-semibold text-text-dark;
 }
 
 img {
   @apply inline-block;
+}
+
+code,
+kbd,
+pre,
+.font-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

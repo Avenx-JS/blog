@@ -27,12 +27,10 @@ const { Content } = await render(page);
   description={description}
   image={image}
 >
-  <section class="section">
-    <div class="container">
-      <h1 set:html={markdownify(title)} class="h2 page-heading" />
-      <div class="content">
-        <Content />
-      </div>
+  <section class="container pt-16 md:pt-24">
+    <h1 set:html={markdownify(title)} class="page-heading" />
+    <div class="content">
+      <Content />
     </div>
   </section>
 </Base>

@@ -10,27 +10,7 @@ const aboutCollection = defineCollection({
     meta_title: z.string().optional(),
     image: z.string().optional(),
     draft: z.boolean().optional(),
-    what_i_do: z.object({
-      title: z.string(),
-      items: z.array(
-        z.object({
-          title: z.string(),
-          description: z.string(),
-        }),
-      ),
-    }),
-  }),
-});
-
-// Contact collection schema
-const contactCollection = defineCollection({
-  loader: glob({ pattern: "**/-*.{md,mdx}", base: "src/content/contact" }),
-  schema: z.object({
-    title: z.string(),
-    meta_title: z.string().optional(),
     description: z.string().optional(),
-    image: z.string().optional(),
-    draft: z.boolean().optional(),
   }),
 });
 
@@ -68,6 +48,8 @@ const postsCollection = defineCollection({
     categories: z.array(z.string()).default(() => ["others"]),
     authors: z.array(z.string()).default(() => ["Admin"]),
     tags: z.array(z.string()).default(() => ["others"]),
+    // link to the GitHub Discussion this post was written from
+    discussion: z.url().optional(),
     draft: z.boolean().optional(),
   }),
 });
@@ -89,7 +71,6 @@ const pagesCollection = defineCollection({
 export const collections = {
   posts: postsCollection,
   about: aboutCollection,
-  contact: contactCollection,
   authors: authorsCollection,
   pages: pagesCollection,
 };

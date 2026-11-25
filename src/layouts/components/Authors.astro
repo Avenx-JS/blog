@@ -1,9 +1,7 @@
 ---
-import { markdownify } from "@/lib/utils/textConverter";
 import { formatUrl } from "@/lib/utils/urlFormatter";
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { BsArrowRightCircle } from "react-icons/bs";
 
 type Props = {
   authors: CollectionEntry<"authors">[];
@@ -11,40 +9,20 @@ type Props = {
 const { authors } = Astro.props;
 ---
 
-<div class="row justify-center">
+<ul class="post-list">
   {
     authors.map((author) => (
-      <div class="col-12 mb-8 sm:col-6 md:col-4">
+      <li class="flex items-center gap-4 py-5">
         {author.data.image && (
-          <div class="mb-4">
-            <Image
-              src={formatUrl(author.data.image)}
-              alt={author.data.title}
-              height={150}
-              width={150}
-              class="mx-auto rounded-lg"
-            />
-          </div>
+          <Image src={formatUrl(author.data.image)} alt="" height={96} width={96} class="h-10 w-10 rounded-full border border-border" />
         )}
-        <h3 class="h4 mt-8 mb-3">
-          <a
-            href={formatUrl(`/authors/${author.id}`)}
-            class="block hover:text-primary transition duration-200"
-          >
+        <div>
+          <a href={formatUrl(`/authors/${author.id}`)} class="font-semibold text-text-dark hover:text-primary">
             {author.data.title}
           </a>
-        </h3>
-        {author.body && (
-          <p class="mb-3" set:text={markdownify(author.body.slice(0, 100))} />
-        )}
-
-        <a
-          href={formatUrl(`/authors/${author.id}`)}
-          class="inline-flex items-center text-primary transition duration-200 hover:opacity-70"
-        >
-          Read More <BsArrowRightCircle className="inline ml-2" />
-        </a>
-      </div>
+          {author.data.description && <p class="text-sm text-text">{author.data.description}</p>}
+        </div>
+      </li>
     ))
   }
-</div>
+</ul>

@@ -1,55 +1,32 @@
 ---
 import config from "@/config/config.json";
-import {
-  IoLogoFacebook,
-  IoLogoLinkedin,
-  IoLogoPinterest,
-  IoLogoTwitter,
-} from "react-icons/io5";
+import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const { base_url } = config.site;
-const { title, description, slug, className } = Astro.props;
+const { title, slug, className } = Astro.props;
+const url = encodeURIComponent(`${base_url}/${slug}`);
+const text = encodeURIComponent(title);
 ---
 
-<ul class={`${className}`}>
-  <li class="inline-block">
+<ul class={className} aria-label="Share this post">
+  <li>
     <a
-      aria-label="facebook share button"
-      href={`https://facebook.com/sharer/sharer.php?u=${base_url}/${slug}`}
+      aria-label="Share on X"
+      href={`https://x.com/intent/post?text=${text}&url=${url}`}
       target="_blank"
       rel="noreferrer noopener"
     >
-      <IoLogoFacebook />
+      <FaXTwitter />
     </a>
   </li>
-  <li class="inline-block">
+  <li>
     <a
-      aria-label="twitter share button"
-      href={`https://twitter.com/intent/tweet/?text=${title}&amp;url=${base_url}/${slug}`}
+      aria-label="Share on LinkedIn"
+      href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
       target="_blank"
       rel="noreferrer noopener"
     >
-      <IoLogoTwitter />
-    </a>
-  </li>
-  <li class="inline-block">
-    <a
-      aria-label="linkedin share button"
-      href={`https://www.linkedin.com/shareArticle?mini=true&url=${base_url}/${slug}&title=${title}&summary=${description}&source=${base_url}`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <IoLogoLinkedin />
-    </a>
-  </li>
-  <li class="inline-block">
-    <a
-      aria-label="pinterest share button"
-      href={`https://pinterest.com/pin/create/button/?url=${base_url}/${slug}&media=&description=${description}`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <IoLogoPinterest />
+      <FaLinkedin />
     </a>
   </li>
 </ul>

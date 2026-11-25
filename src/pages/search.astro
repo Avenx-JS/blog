@@ -8,16 +8,15 @@ const posts = await getSinglePage("posts");
 
 // List of items to search in
 const searchList = posts.map((item) => ({
-  slug: `blog/${item.id}`,
+  slug: item.id,
   data: item.data,
   content: item.body,
 }));
 ---
 
 <Base title={`Search`}>
-  <section class="section">
-    <div class="container">
-      <SearchBar client:load searchList={searchList} />
-    </div>
+  <section class="container pt-16 md:pt-24">
+    <h1 class="page-heading mb-8">Search</h1>
+    <SearchBar client:load searchList={searchList} />
   </section>
 </Base>
